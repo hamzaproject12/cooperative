@@ -6,7 +6,7 @@ import { ChevronUp, ListFilter, Map } from 'lucide-react';
 import CooperativeList from '../../components/CooperativeList';
 import ExploreMap from '../../components/Map';
 import FloatingSearchBar from '../../components/FloatingSearchBar';
-import { cooperatives } from '../../data/mockData';
+import { cooperatives, productTypes, coopMatchesProductType } from '../../data/mockData';
 import { useCooperativeStore } from '../../store/useCooperativeStore';
 
 export default function ExplorePage() {
@@ -21,19 +21,26 @@ export default function ExplorePage() {
     return ['Toutes', ...uniqueZones];
   }, []);
 
-  const categories = useMemo(() => {
-    const uniqueCategories = Array.from(
-      new Set(cooperatives.map((cooperative) => cooperative.category)),
-    );
-    return ['Toutes', ...uniqueCategories];
-  }, []);
+  const categories = useMemo(
+    () => ['Toutes', ...productTypes.map((type) => type.label)],
+    [],
+  );
 
   const filteredCooperatives = useMemo(() => {
     return cooperatives.filter((cooperative) => {
       const zoneMatch = selectedZone === 'Toutes' || cooperative.zone === selectedZone;
-      const categoryMatch =
-        selectedCategory === 'Toutes' || cooperative.category === selectedCategory;
-      return zoneMatch && categoryMatch;
+
+      if (selectedCategory === 'Toutes') {
+        return zoneMatch;
+      }
+
+      const matchingType = productTypes.find((type) => type.label === selectedCategory);
+      if (!matchingType) {
+        return zoneMatch;
+      }
+
+      const productTypeMatch = coopMatchesProductType(cooperative, matchingType.slug);
+      return zoneMatch && productTypeMatch;
     });
   }, [selectedZone, selectedCategory]);
 

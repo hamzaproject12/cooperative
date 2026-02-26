@@ -620,6 +620,8 @@ function FloatingSearchBar({ zones, categories, selectedZone, selectedCategory, 
 "use strict";
 
 __turbopack_context__.s([
+    "coopMatchesProductType",
+    ()=>coopMatchesProductType,
     "cooperatives",
     ()=>cooperatives,
     "getProductTypeMeta",
@@ -1379,18 +1381,22 @@ function ExplorePage() {
             ...uniqueZones
         ];
     }, []);
-    const categories = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useMemo"])(()=>{
-        const uniqueCategories = Array.from(new Set(__TURBOPACK__imported__module__$5b$project$5d2f$data$2f$mockData$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["cooperatives"].map((cooperative)=>cooperative.category)));
-        return [
+    const categories = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useMemo"])(()=>[
             'Toutes',
-            ...uniqueCategories
-        ];
-    }, []);
+            ...__TURBOPACK__imported__module__$5b$project$5d2f$data$2f$mockData$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["productTypes"].map((type)=>type.label)
+        ], []);
     const filteredCooperatives = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useMemo"])(()=>{
         return __TURBOPACK__imported__module__$5b$project$5d2f$data$2f$mockData$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["cooperatives"].filter((cooperative)=>{
             const zoneMatch = selectedZone === 'Toutes' || cooperative.zone === selectedZone;
-            const categoryMatch = selectedCategory === 'Toutes' || cooperative.category === selectedCategory;
-            return zoneMatch && categoryMatch;
+            if (selectedCategory === 'Toutes') {
+                return zoneMatch;
+            }
+            const matchingType = __TURBOPACK__imported__module__$5b$project$5d2f$data$2f$mockData$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["productTypes"].find((type)=>type.label === selectedCategory);
+            if (!matchingType) {
+                return zoneMatch;
+            }
+            const productTypeMatch = (0, __TURBOPACK__imported__module__$5b$project$5d2f$data$2f$mockData$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["coopMatchesProductType"])(cooperative, matchingType.slug);
+            return zoneMatch && productTypeMatch;
         });
     }, [
         selectedZone,
@@ -1428,17 +1434,17 @@ function ExplorePage() {
                                     className: "h-full w-full rounded-none border-0"
                                 }, void 0, false, {
                                     fileName: "[project]/app/explore/page.tsx",
-                                    lineNumber: 62,
+                                    lineNumber: 69,
                                     columnNumber: 15
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/app/explore/page.tsx",
-                                lineNumber: 61,
+                                lineNumber: 68,
                                 columnNumber: 13
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/app/explore/page.tsx",
-                            lineNumber: 60,
+                            lineNumber: 67,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1457,7 +1463,7 @@ function ExplorePage() {
                                             embedded: true
                                         }, void 0, false, {
                                             fileName: "[project]/app/explore/page.tsx",
-                                            lineNumber: 71,
+                                            lineNumber: 78,
                                             columnNumber: 15
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1471,7 +1477,7 @@ function ExplorePage() {
                                                             className: "text-terracotta"
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/explore/page.tsx",
-                                                            lineNumber: 82,
+                                                            lineNumber: 89,
                                                             columnNumber: 19
                                                         }, this),
                                                         filteredCooperatives.length,
@@ -1480,7 +1486,7 @@ function ExplorePage() {
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/app/explore/page.tsx",
-                                                    lineNumber: 81,
+                                                    lineNumber: 88,
                                                     columnNumber: 17
                                                 }, this),
                                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
@@ -1490,7 +1496,7 @@ function ExplorePage() {
                                                             size: 14
                                                         }, void 0, false, {
                                                             fileName: "[project]/app/explore/page.tsx",
-                                                            lineNumber: 86,
+                                                            lineNumber: 93,
                                                             columnNumber: 19
                                                         }, this),
                                                         totalProducts,
@@ -1498,19 +1504,19 @@ function ExplorePage() {
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/app/explore/page.tsx",
-                                                    lineNumber: 85,
+                                                    lineNumber: 92,
                                                     columnNumber: 17
                                                 }, this)
                                             ]
                                         }, void 0, true, {
                                             fileName: "[project]/app/explore/page.tsx",
-                                            lineNumber: 80,
+                                            lineNumber: 87,
                                             columnNumber: 15
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/app/explore/page.tsx",
-                                    lineNumber: 70,
+                                    lineNumber: 77,
                                     columnNumber: 13
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1521,24 +1527,24 @@ function ExplorePage() {
                                         className: "border-0 bg-transparent p-0 shadow-none"
                                     }, void 0, false, {
                                         fileName: "[project]/app/explore/page.tsx",
-                                        lineNumber: 92,
+                                        lineNumber: 99,
                                         columnNumber: 15
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/app/explore/page.tsx",
-                                    lineNumber: 91,
+                                    lineNumber: 98,
                                     columnNumber: 13
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/explore/page.tsx",
-                            lineNumber: 69,
+                            lineNumber: 76,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/explore/page.tsx",
-                    lineNumber: 59,
+                    lineNumber: 66,
                     columnNumber: 9
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1550,7 +1556,7 @@ function ExplorePage() {
                             hideSpotlight: true
                         }, void 0, false, {
                             fileName: "[project]/app/explore/page.tsx",
-                            lineNumber: 103,
+                            lineNumber: 110,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
@@ -1562,14 +1568,14 @@ function ExplorePage() {
                                     className: `transition-transform ${isSheetOpen ? 'rotate-180' : ''}`
                                 }, void 0, false, {
                                     fileName: "[project]/app/explore/page.tsx",
-                                    lineNumber: 113,
+                                    lineNumber: 120,
                                     columnNumber: 13
                                 }, this),
                                 "Voir les coopératives"
                             ]
                         }, void 0, true, {
                             fileName: "[project]/app/explore/page.tsx",
-                            lineNumber: 109,
+                            lineNumber: 116,
                             columnNumber: 11
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$framer$2d$motion$2f$dist$2f$es$2f$components$2f$AnimatePresence$2f$index$2e$mjs__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["AnimatePresence"], {
@@ -1597,7 +1603,7 @@ function ExplorePage() {
                                                 className: "mx-auto h-1.5 w-14 rounded-full bg-palmier/25"
                                             }, void 0, false, {
                                                 fileName: "[project]/app/explore/page.tsx",
-                                                lineNumber: 130,
+                                                lineNumber: 137,
                                                 columnNumber: 19
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$FloatingSearchBar$2e$tsx__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
@@ -1610,7 +1616,7 @@ function ExplorePage() {
                                                 embedded: true
                                             }, void 0, false, {
                                                 fileName: "[project]/app/explore/page.tsx",
-                                                lineNumber: 131,
+                                                lineNumber: 138,
                                                 columnNumber: 19
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1627,18 +1633,18 @@ function ExplorePage() {
                                                     ]
                                                 }, void 0, true, {
                                                     fileName: "[project]/app/explore/page.tsx",
-                                                    lineNumber: 141,
+                                                    lineNumber: 148,
                                                     columnNumber: 21
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/app/explore/page.tsx",
-                                                lineNumber: 140,
+                                                lineNumber: 147,
                                                 columnNumber: 19
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/app/explore/page.tsx",
-                                        lineNumber: 129,
+                                        lineNumber: 136,
                                         columnNumber: 17
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -1649,40 +1655,40 @@ function ExplorePage() {
                                             className: "h-full border-0 bg-transparent p-0 shadow-none"
                                         }, void 0, false, {
                                             fileName: "[project]/app/explore/page.tsx",
-                                            lineNumber: 148,
+                                            lineNumber: 155,
                                             columnNumber: 19
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/app/explore/page.tsx",
-                                        lineNumber: 147,
+                                        lineNumber: 154,
                                         columnNumber: 17
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/app/explore/page.tsx",
-                                lineNumber: 122,
+                                lineNumber: 129,
                                 columnNumber: 15
                             }, this) : null
                         }, void 0, false, {
                             fileName: "[project]/app/explore/page.tsx",
-                            lineNumber: 120,
+                            lineNumber: 127,
                             columnNumber: 11
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/app/explore/page.tsx",
-                    lineNumber: 102,
+                    lineNumber: 109,
                     columnNumber: 9
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/app/explore/page.tsx",
-            lineNumber: 58,
+            lineNumber: 65,
             columnNumber: 7
         }, this)
     }, void 0, false, {
         fileName: "[project]/app/explore/page.tsx",
-        lineNumber: 56,
+        lineNumber: 63,
         columnNumber: 5
     }, this);
 }

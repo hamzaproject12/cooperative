@@ -632,7 +632,7 @@ export type ProductTypeInfo = {
   alt: string;
 };
 
-function coopMatchesProductType(coop: Cooperative, typeSlug: ProductTypeSlug): boolean {
+export function coopMatchesProductType(coop: Cooperative, typeSlug: ProductTypeSlug): boolean {
   const axis = (coop.developmentAxis ?? '').toLowerCase();
   const spec = (coop.specialty ?? '').toLowerCase();
   switch (typeSlug) {

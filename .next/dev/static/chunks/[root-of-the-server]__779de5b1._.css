@@ -463,6 +463,10 @@ img, video {
   top: 1rem;
 }
 
+.right-2\.5 {
+  right: .625rem;
+}
+
 .z-0 {
   z-index: 0;
 }
@@ -933,6 +937,10 @@ img, video {
   resize: both;
 }
 
+.appearance-none {
+  appearance: none;
+}
+
 .grid-cols-1 {
   grid-template-columns: repeat(1, minmax(0, 1fr));
 }
@@ -1007,6 +1015,10 @@ img, video {
 
 .gap-8 {
   gap: 2rem;
+}
+
+.gap-2\.5 {
+  gap: .625rem;
 }
 
 .space-y-1 > :not([hidden]) ~ :not([hidden]) {
@@ -1199,6 +1211,10 @@ img, video {
 
 .border-white\/80 {
   border-color: #fffc;
+}
+
+.border-palmier\/15 {
+  border-color: #2d5a2726;
 }
 
 .bg-\[\#25D366\] {
@@ -1719,6 +1735,10 @@ img, video {
   padding-top: 1.5rem;
 }
 
+.pr-9 {
+  padding-right: 2.25rem;
+}
+
 .text-center {
   text-align: center;
 }
@@ -1990,6 +2010,11 @@ img, video {
 
 .shadow-terracotta\/25 {
   --tw-shadow-color: #e2725b40;
+  --tw-shadow: var(--tw-shadow-colored);
+}
+
+.shadow-palmier\/5 {
+  --tw-shadow-color: #2d5a270d;
   --tw-shadow: var(--tw-shadow-colored);
 }
 
@@ -2292,6 +2317,26 @@ body {
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 
+.focus\:border-terracotta:focus {
+  --tw-border-opacity: 1;
+  border-color: rgb(226 114 91 / var(--tw-border-opacity, 1));
+}
+
+.focus\:outline-none:focus {
+  outline-offset: 2px;
+  outline: 2px solid #0000;
+}
+
+.focus\:ring-2:focus {
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+}
+
+.focus\:ring-terracotta\/25:focus {
+  --tw-ring-color: #e2725b40;
+}
+
 .group:hover .group-hover\:-translate-y-0\.5 {
   --tw-translate-y: -.125rem;
   transform: translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
@@ -2421,6 +2466,10 @@ body {
     align-items: center;
   }
 
+  .sm\:items-stretch {
+    align-items: stretch;
+  }
+
   .sm\:justify-between {
     justify-content: space-between;
   }
@@ -2431,6 +2480,14 @@ body {
 
   .sm\:gap-6 {
     gap: 1.5rem;
+  }
+
+  .sm\:gap-4 {
+    gap: 1rem;
+  }
+
+  .sm\:gap-5 {
+    gap: 1.25rem;
   }
 
   .sm\:p-4 {
@@ -2468,6 +2525,16 @@ body {
   .sm\:py-8 {
     padding-top: 2rem;
     padding-bottom: 2rem;
+  }
+
+  .sm\:px-5 {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+
+  .sm\:py-4 {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
   }
 
   .sm\:pt-5 {

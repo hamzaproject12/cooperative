@@ -1,8 +1,6 @@
-[00:00:20.262] Server  LOG     ✓ Ready in 14s
-[00:00:23.570] Server  LOG     ○ Compiling / ...
-[00:01:02.479] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:01:10.635] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:01:11.349] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:01:12.485] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:01:16.091] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
-[00:04:56.182] Browser WARN    Image with src "http://localhost:3000/images/images/Elevage%20Poulet%20-%20Elevage%20Poulet.png" has either width or height modified, but not the other. If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio.
+[00:00:01.466] Server  LOG     ✓ Ready in 1047ms
+[00:00:09.495] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:02:01.726] Server  LOG     ✓ Compiled in 451ms
+[00:02:02.073] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
+[00:02:24.112] Server  LOG     ✓ Compiled in 148ms
+[00:02:24.455] Browser INFO    %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold
