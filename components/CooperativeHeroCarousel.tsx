@@ -65,7 +65,10 @@ export default function CooperativeHeroCarousel({
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] },
+      transition: {
+        duration: 0.5,
+        ease: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number],
+      },
     },
   };
 
@@ -73,7 +76,7 @@ export default function CooperativeHeroCarousel({
     <motion.section
       initial={{ opacity: 0, y: 24 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] }}
+      transition={{ duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number] }}
       className="relative overflow-hidden rounded-2xl border border-white/50 shadow-[0_25px_50px_-12px_rgba(45,90,39,0.15)]"
     >
       <div className="grid min-h-[360px] grid-cols-1 md:min-h-[420px] md:grid-cols-2">
@@ -187,7 +190,10 @@ export default function CooperativeHeroCarousel({
                   visible: {
                     opacity: 1,
                     y: 0,
-                    transition: { duration: 0.4, ease: [0.25, 0.46, 0.45, 0.94] },
+                    transition: {
+                      duration: 0.4,
+                      ease: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number],
+                    },
                   },
                 }}
                 className="rounded-full border border-white/60 bg-white/95 px-3 py-1.5 text-[11px] font-semibold uppercase tracking-wider text-palmier shadow-lg backdrop-blur-md"
