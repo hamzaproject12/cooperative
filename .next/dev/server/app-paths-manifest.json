@@ -1,0 +1,8 @@
+{
+  "/category/[slug]/page": "app/category/[slug]/page.js",
+  "/cooperative/[slug]/page": "app/cooperative/[slug]/page.js",
+  "/explore/page": "app/explore/page.js",
+  "/page": "app/page.js",
+  "/product/[id]/page": "app/product/[id]/page.js",
+  "/zone/[slug]/page": "app/zone/[slug]/page.js"
+}

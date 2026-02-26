@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 4, "column": 0}, "map": {"version":3,"sources":["file:///C:/Users/BXBD1836/OneDrive%20-%20orange.com/Documents/Coop%C3%A9ratives/components/BackButton.tsx"],"sourcesContent":["'use client';\r\n\r\nimport { useRouter } from 'next/navigation';\r\nimport { ArrowLeft } from 'lucide-react';\r\n\r\ntype BackButtonProps = {\r\n  className?: string;\r\n};\r\n\r\nexport default function BackButton({ className = '' }: BackButtonProps) {\r\n  const router = useRouter();\r\n\r\n  return (\r\n    <button\r\n      type=\"button\"\r\n      onClick={() => router.back()}\r\n      className={`inline-flex items-center gap-2 rounded-xl border border-palmier/20 bg-white/80 px-4 py-2.5 text-sm font-medium text-palmier transition hover:bg-palmier/5 hover:border-palmier/40 ${className}`}\r\n    >\r\n      <ArrowLeft size={18} />\r\n      Retour\r\n    </button>\r\n  );\r\n}\r\n"],"names":[],"mappings":";;;;;AAEA;AACA;;;AAHA;;;AASe,SAAS,WAAW,EAAE,YAAY,EAAE,EAAmB;;IACpE,MAAM,SAAS,IAAA,kJAAS;IAExB,qBACE,6LAAC;QACC,MAAK;QACL,SAAS,IAAM,OAAO,IAAI;QAC1B,WAAW,CAAC,kLAAkL,EAAE,WAAW;;0BAE3M,6LAAC,gOAAS;gBAAC,MAAM;;;;;;YAAM;;;;;;;AAI7B;GAbwB;;QACP,kJAAS;;;KADF"}}]
+}
