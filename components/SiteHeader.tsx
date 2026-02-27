@@ -74,7 +74,7 @@ export default function SiteHeader() {
                 isTransparent ? 'text-white' : 'text-palmier'
               }`}
             >
-              Oasis Moderne
+              Micro-Entreprises Rurales
             </motion.span>
           </Link>
 

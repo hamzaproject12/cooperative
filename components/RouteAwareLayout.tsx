@@ -29,7 +29,7 @@ export default function RouteAwareLayout({ children }: RouteAwareLayoutProps) {
         <footer className="mb-4 grid gap-6 rounded-2xl border border-white/40 bg-white/75 px-6 py-8 text-sm text-palmier/85 shadow-soft backdrop-blur-md md:grid-cols-4">
           <div>
             <Link href="/" className="text-base font-semibold">
-              Oasis Moderne
+              Micro-Entreprises Rurales
             </Link>
             <p className="mt-3 text-sm text-palmier/75">
               Marketplace multi-coopératives dédiée au terroir des zones AKNOUL et TAINASTE. Valorisez vos
