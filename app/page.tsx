@@ -1,4 +1,4 @@
-/* eslint-disable react/no-unescaped-entities */
+dj'ai /* eslint-disable react/no-unescaped-entities */
 'use client';
 
 import Image from 'next/image';
@@ -26,7 +26,7 @@ export default function HomePage() {
             Marketplace Régionale
           </p>
           <h1 className="max-w-3xl text-3xl font-extrabold leading-tight text-white drop-shadow-md sm:text-5xl lg:text-6xl">
-            Découvrez les coopératives des territoires d’Aknoul et de Tainaste
+            Découvrez le terroir d’Aknoul et de tainaste
           </h1>
           <p className="mx-auto mt-5 max-w-xl text-base text-white/90 sm:text-lg">
             Produits du terroir, artisanat et savoir-faire local.
