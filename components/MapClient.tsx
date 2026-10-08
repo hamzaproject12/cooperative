@@ -196,9 +196,20 @@ export default function MapClient({
         className="h-full w-full !min-h-[200px]"
         style={{ height: '100%', width: '100%' }}
       >
+        {/* Satellite imagery (Esri World Imagery - no API key required) */}
         <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/">CARTO</a>'
-          url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
+          attribution='Imagerie &copy; <a href="https://www.esri.com/">Esri</a>, Maxar, Earthstar Geographics'
+          url="https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}"
+          maxNativeZoom={19}
+          maxZoom={19}
+          zIndex={1}
+        />
+        {/* Place names and boundaries drawn on top of the imagery */}
+        <TileLayer
+          url="https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}"
+          maxNativeZoom={19}
+          maxZoom={19}
+          zIndex={2}
         />
 
         <MapResizeHandler />
