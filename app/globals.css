@@ -52,6 +52,23 @@ body {
   filter: brightness(1.08);
 }
 
+/* Zone name label centered in each polygon */
+.leaflet-tooltip.zone-label {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9), 0 0 8px rgba(0, 0, 0, 0.6);
+  pointer-events: none;
+}
+
+.leaflet-tooltip.zone-label::before {
+  display: none;
+}
+
 /* Map popup styling */
 .leaflet-popup-content-wrapper {
   border-radius: 1rem;

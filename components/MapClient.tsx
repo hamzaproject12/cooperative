@@ -7,13 +7,16 @@ import L from 'leaflet';
 import {
   MapContainer,
   Marker,
+  Polygon,
   Popup,
   TileLayer,
+  Tooltip,
   useMap,
 } from 'react-leaflet';
 import { AnimatePresence, motion } from 'framer-motion';
 import { ArrowUpRight, Package } from 'lucide-react';
 import type { Cooperative } from '../data/mockData';
+import { zonePolygons } from '../data/zonePolygons';
 import { useCooperativeStore } from '../store/useCooperativeStore';
 import ProductsPopup from './ProductsPopup';
 import 'leaflet/dist/leaflet.css';
@@ -190,8 +193,8 @@ export default function MapClient({
     >
       {hasValidSize ? (
       <MapContainer
-        center={[31.7917, -4.937]}
-        zoom={8}
+        center={[34.6, -3.95]}
+        zoom={9}
         scrollWheelZoom
         className="h-full w-full !min-h-[200px]"
         style={{ height: '100%', width: '100%' }}
@@ -211,6 +214,24 @@ export default function MapClient({
           maxZoom={19}
           zIndex={2}
         />
+
+        {zonePolygons.map((zone) => (
+          <Polygon
+            key={zone.zone}
+            positions={zone.positions}
+            pathOptions={{
+              color: zone.color,
+              weight: 3,
+              opacity: 0.95,
+              fillColor: zone.color,
+              fillOpacity: zone.fillOpacity,
+            }}
+          >
+            <Tooltip permanent direction="center" className="zone-label">
+              {zone.zone}
+            </Tooltip>
+          </Polygon>
+        ))}
 
         <MapResizeHandler />
         <MapFocusController target={activeCooperative} />
