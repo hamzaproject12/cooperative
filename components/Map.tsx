@@ -7,6 +7,8 @@ type MapProps = {
   cooperatives: Cooperative[];
   className?: string;
   hideSpotlight?: boolean;
+  selectedZone?: string;
+  onZoneSelect?: (zone: string) => void;
 };
 
 const MapClient = dynamic(() => import('./MapClient'), {
@@ -18,8 +20,6 @@ const MapClient = dynamic(() => import('./MapClient'), {
   ),
 });
 
-export default function Map({ cooperatives, className, hideSpotlight }: MapProps) {
-  return (
-    <MapClient cooperatives={cooperatives} className={className} hideSpotlight={hideSpotlight} />
-  );
+export default function Map(props: MapProps) {
+  return <MapClient {...props} />;
 }

@@ -25,6 +25,9 @@ type MapClientProps = {
   cooperatives: Cooperative[];
   className?: string;
   hideSpotlight?: boolean;
+  /** Zone choisie dans le filtre ('Toutes' = les deux) : la carte cadre son périmètre. */
+  selectedZone?: string;
+  onZoneSelect?: (zone: string) => void;
 };
 
 type MapFocusProps = {
@@ -70,7 +73,7 @@ function MapFocusController({ target }: MapFocusProps) {
 
     map.whenReady(() => {
       try {
-        map.flyTo([lat, lng], 10, {
+        map.flyTo([lat, lng], Math.max(map.getZoom(), 11), {
           animate: true,
           duration: 0.8,
         });
@@ -79,6 +82,27 @@ function MapFocusController({ target }: MapFocusProps) {
       }
     });
   }, [map, target]);
+
+  return null;
+}
+
+function ZoneFitController({ zone }: { zone: string }) {
+  const map = useMap();
+
+  useEffect(() => {
+    const polygons =
+      zone === 'Toutes' ? zonePolygons : zonePolygons.filter((polygon) => polygon.zone === zone);
+    if (polygons.length === 0) return;
+
+    const bounds = L.latLngBounds(polygons.flatMap((polygon) => polygon.positions));
+    map.whenReady(() => {
+      try {
+        map.flyToBounds(bounds, { padding: [24, 24], duration: 0.8 });
+      } catch {
+        // Ignore transient map state errors during rapid filter changes.
+      }
+    });
+  }, [map, zone]);
 
   return null;
 }
@@ -129,7 +153,10 @@ export default function MapClient({
   cooperatives,
   className,
   hideSpotlight = false,
+  selectedZone,
+  onZoneSelect,
 }: MapClientProps) {
+  const zoneMode = selectedZone !== undefined;
   const activeCooperativeId = useCooperativeStore((state) => state.activeCooperativeId);
   const setActiveCooperativeId = useCooperativeStore((state) => state.setActiveCooperativeId);
   const validCooperatives = useMemo(
@@ -143,18 +170,14 @@ export default function MapClient({
       return;
     }
 
-    if (!activeCooperativeId) {
-      setActiveCooperativeId(validCooperatives[0].id);
-      return;
-    }
-
     const stillVisible = validCooperatives.some(
       (cooperative) => cooperative.id === activeCooperativeId,
     );
-    if (!stillVisible) {
-      setActiveCooperativeId(validCooperatives[0].id);
-    }
-  }, [activeCooperativeId, validCooperatives, setActiveCooperativeId]);
+    if (stillVisible) return;
+
+    // En mode zone, on ne présélectionne rien : la carte reste cadrée sur le périmètre choisi.
+    setActiveCooperativeId(zoneMode ? null : validCooperatives[0].id);
+  }, [activeCooperativeId, validCooperatives, setActiveCooperativeId, zoneMode]);
 
   const activeCooperative =
     validCooperatives.find((cooperative) => cooperative.id === activeCooperativeId) ?? null;
@@ -215,25 +238,35 @@ export default function MapClient({
           zIndex={2}
         />
 
-        {zonePolygons.map((zone) => (
-          <Polygon
-            key={zone.zone}
-            positions={zone.positions}
-            pathOptions={{
-              color: zone.color,
-              weight: 3,
-              opacity: 0.95,
-              fillColor: zone.color,
-              fillOpacity: zone.fillOpacity,
-            }}
-          >
-            <Tooltip permanent direction="center" className="zone-label">
-              {zone.zone}
-            </Tooltip>
-          </Polygon>
-        ))}
+        {zonePolygons.map((zone) => {
+          const isDimmed = zoneMode && selectedZone !== 'Toutes' && selectedZone !== zone.zone;
+          const isSelected = zoneMode && selectedZone === zone.zone;
+
+          return (
+            <Polygon
+              key={zone.zone}
+              positions={zone.positions}
+              pathOptions={{
+                color: zone.color,
+                weight: isSelected ? 4 : 3,
+                opacity: isDimmed ? 0.4 : 0.95,
+                fillColor: zone.color,
+                fillOpacity: isDimmed ? 0.04 : isSelected ? 0.25 : zone.fillOpacity,
+                dashArray: isDimmed ? '6 6' : undefined,
+              }}
+              eventHandlers={{
+                click: () => onZoneSelect?.(zone.zone),
+              }}
+            >
+              <Tooltip permanent direction="center" className="zone-label">
+                {zone.zone}
+              </Tooltip>
+            </Polygon>
+          );
+        })}
 
         <MapResizeHandler />
+        {zoneMode ? <ZoneFitController zone={selectedZone} /> : null}
         <MapFocusController target={activeCooperative} />
 
         {validCooperatives.map((cooperative) => {

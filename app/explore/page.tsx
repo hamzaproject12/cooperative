@@ -18,7 +18,7 @@ export default function ExplorePage() {
 
   const zones = useMemo(() => {
     const uniqueZones = Array.from(new Set(cooperatives.map((cooperative) => cooperative.zone)));
-    return ['Toutes', ...uniqueZones];
+    return ['Toutes', ...uniqueZones.sort()];
   }, []);
 
   const categories = useMemo(
@@ -69,6 +69,8 @@ export default function ExplorePage() {
               <ExploreMap
                 cooperatives={filteredCooperatives}
                 className="h-full w-full rounded-none border-0"
+                selectedZone={selectedZone}
+                onZoneSelect={setSelectedZone}
               />
             </div>
           </div>
@@ -111,6 +113,8 @@ export default function ExplorePage() {
             cooperatives={filteredCooperatives}
             className="h-full min-h-[300px] rounded-none border-0"
             hideSpotlight
+            selectedZone={selectedZone}
+            onZoneSelect={setSelectedZone}
           />
 
           <button
